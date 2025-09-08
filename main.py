@@ -93,7 +93,7 @@ def main():
     parser.add_argument('--tools', nargs='*',
                         choices=['gmail', 'drive', 'calendar', 'docs', 'sheets', 'chat', 'forms', 'slides', 'tasks', 'search'],
                         help='Specify which tools to register. If not provided, all tools are registered.')
-    parser.add_argument('--tool-tier', choices=['core', 'extended', 'complete'],
+    parser.add_argument('--tool-tier', choices=['core', 'extended', 'complete', 'custom_sc'],
                         help='Load tools based on tier level. Can be combined with --tools to filter services.')
     parser.add_argument('--transport', choices=['stdio', 'streamable-http'], default='stdio',
                         help='Transport mode: stdio (default) or streamable-http')
@@ -151,11 +151,11 @@ def main():
         'calendar': lambda: __import__('gcalendar.calendar_tools'),
         'docs': lambda: __import__('gdocs.docs_tools'),
         'sheets': lambda: __import__('gsheets.sheets_tools'),
-        'chat': lambda: __import__('gchat.chat_tools'),
-        'forms': lambda: __import__('gforms.forms_tools'),
-        'slides': lambda: __import__('gslides.slides_tools'),
-        'tasks': lambda: __import__('gtasks.tasks_tools'),
-        'search': lambda: __import__('gsearch.search_tools')
+        # 'chat': lambda: __import__('gchat.chat_tools'),
+        # 'forms': lambda: __import__('gforms.forms_tools'),
+        # 'slides': lambda: __import__('gslides.slides_tools'),
+        # 'tasks': lambda: __import__('gtasks.tasks_tools'),
+        # 'search': lambda: __import__('gsearch.search_tools')
     }
 
     tool_icons = {
@@ -164,11 +164,11 @@ def main():
         'calendar': '📅',
         'docs': '📄',
         'sheets': '📊',
-        'chat': '💬',
-        'forms': '📝',
-        'slides': '🖼️',
-        'tasks': '✓',
-        'search': '🔍'
+        # 'chat': '💬',
+        # 'forms': '📝',
+        # 'slides': '🖼️',
+        # 'tasks': '✓',
+        # 'search': '🔍'
     }
 
     # Determine which tools to import based on arguments

@@ -17,6 +17,9 @@ gmail:
     - batch_modify_gmail_message_labels
     - start_google_auth
 
+  custom_sc:
+    - send_gmail_message
+
 drive:
   core:
     - search_drive_files
@@ -27,6 +30,8 @@ drive:
   complete:
     - get_drive_file_permissions
     - check_drive_file_public_access
+  custom_sc:
+    - search_drive_files
 
 calendar:
   core:
@@ -37,6 +42,9 @@ calendar:
   extended:
     - delete_event
   complete: []
+  custom_sc:
+    - create_event
+    - list_calendars
 
 docs:
   core:
@@ -60,6 +68,10 @@ docs:
     - create_document_comment
     - reply_to_document_comment
     - resolve_document_comment
+  custom_sc:
+    - get_doc_content
+    - find_and_replace_doc
+    - export_doc_to_pdf
 
 sheets:
   core:
@@ -75,6 +87,9 @@ sheets:
     - create_spreadsheet_comment
     - reply_to_spreadsheet_comment
     - resolve_spreadsheet_comment
+  custom_sc:
+    - modify_sheet_values
+    - read_sheet_values
 
 chat:
   core:

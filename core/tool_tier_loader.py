@@ -13,7 +13,7 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
-TierLevel = Literal["core", "extended", "complete"]
+TierLevel = Literal["core", "extended", "complete", "custom_sc"]
 
 class ToolTierLoader:
     """Loads and manages tool tiers from configuration."""
@@ -100,7 +100,7 @@ class ToolTierLoader:
         Returns:
             List of tool names up to the specified tier level
         """
-        tier_order = ["core", "extended", "complete"]
+        tier_order = ["core", "extended", "complete", "custom_sc"]
         max_tier_index = tier_order.index(tier)
         
         tools = []
@@ -160,7 +160,7 @@ def resolve_tools_from_tier(tier: TierLevel, services: Optional[List[str]] = Non
     Resolve tool names and service names for the specified tier.
     
     Args:
-        tier: The tier level (core, extended, complete)
+        tier: The tier level (core, extended, complete, custom_sc)
         services: Optional list of services to filter by
     
     Returns:
@@ -170,8 +170,12 @@ def resolve_tools_from_tier(tier: TierLevel, services: Optional[List[str]] = Non
     """
     loader = ToolTierLoader()
     
-    # Get all tools for the tier
-    tools = loader.get_tools_up_to_tier(tier, services)
+    # For custom_sc, get only the specific tier tools, not cumulative
+    if tier == "custom_sc":
+        tools = loader.get_tools_for_tier(tier, services)
+    else:
+        # For standard tiers, get all tools up to the tier (cumulative behavior)
+        tools = loader.get_tools_up_to_tier(tier, services)
     
     # Map back to service names
     service_names = loader.get_services_for_tools(tools)
